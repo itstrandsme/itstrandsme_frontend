@@ -1,0 +1,26 @@
+language: node_js
+
+dist: xenial
+
+node_js:
+  - "11"
+
+install: yarn
+
+cache: yarn
+
+script:
+  - yarn run build
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  on:
+    tags: true
+  target-branch: master
+  local-dir: ${TRAVIS_BUILD_DIR}/dist
+  fqdn: itstrands.me
+  project-name: itstrandsme/itstrandsme_frontend
+  repo: itstrandsme/itstrandsme.github.io
+  keep-history: true
