@@ -1,5 +1,7 @@
 # itstrandsme_frontend
 
+[![Build Status](https://travis-ci.com/itstrandsme/itstrandsme_frontend.svg?branch=master)](https://travis-ci.com/itstrandsme/itstrandsme_frontend)
+
 ## Project setup
 ```
 yarn install
