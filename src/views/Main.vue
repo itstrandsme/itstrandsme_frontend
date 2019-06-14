@@ -6,6 +6,9 @@
 import Rain from "@/views/Rain.vue"
 
 export default {
-  name: "MainView"
+  name: "MainView",
+  components: {
+    Rain
+  }
 };
 </script>

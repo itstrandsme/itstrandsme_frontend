@@ -1,12 +1,13 @@
 import * as WebGL from "./webgl";
 import GL from "./gl-obj";
-import loadImages from "./image-loader";
 import createCanvas from "./create-canvas";
+import RainShaders from "./shaders";
 
-let requireShaderScript = require("glslify");
+const shaders = new RainShaders();
+const glsl = require('glslify');
 
-let vertShader = requireShaderScript('./shaders/simple.vert');
-let fragShader = requireShaderScript('./shaders/water.frag');
+const vertShader = glsl(shaders.getVertexCode());
+const fragShader = glsl(shaders.getFragmentCode());
 
 const defaultOptions={
   renderShadow:false,

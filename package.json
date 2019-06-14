@@ -9,8 +9,9 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "browserify": "^16.2.3",
     "core-js": "^2.6.5",
-    "glslify": "^2.3.1",
+    "glslify": "^7.0.0",
     "gsap": "^1.18.0",
     "vue": "^2.6.10",
     "vuetify": "^1.5.14"
@@ -24,5 +25,10 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "vue-template-compiler": "^2.6.10"
+  },
+  "browserify": {
+    "transform": [
+      "glslify"
+    ]
   }
 }
