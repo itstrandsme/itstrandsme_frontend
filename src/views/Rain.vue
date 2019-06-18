@@ -1,52 +1,16 @@
 <template>
-	<div>
+	<div style="position: absolute">
 		<div class="image-preload" style="display:none">
 			<img src="img/drop-color.png" alt="">
 			<img src="img/drop-alpha.png" alt="">
 			<img src="img/weather/texture-rain-fg.png" />
 			<img src="img/weather/texture-rain-bg.png" />
-			<img src="img/weather/texture-sun-fg.png" />
-			<img src="img/weather/texture-sun-bg.png" />
-			<img src="img/weather/texture-fallout-fg.png" />
-			<img src="img/weather/texture-fallout-bg.png" />
-			<img src="img/weather/texture-drizzle-fg.png" />
-			<img src="img/weather/texture-drizzle-bg.png" />
 		</div>
-		<div class="container">
+		<div>
 			<div class="slideshow">
 				<canvas width="1" height="1" id="container" style="position:absolute"></canvas>
 				<!-- Heavy Rain -->
-				<div class="slide" id="slide-1" data-weather="rain">
-					<div class="slide__element slide__element--date">Sunday, 24<sup>th</sup> of October 2043</div>
-					<div class="slide__element slide__element--temp">12°<small>C</small></div>
-				</div>
-				<!-- Drizzle -->
-				<div class="slide" id="slide-2" data-weather="drizzle">
-					<div class="slide__element slide__element--date">Saturday, 25<sup>th</sup> of October 2043</div>
-					<div class="slide__element slide__element--temp">18°<small>C</small></div>
-				</div>
-				<!-- Sunny -->
-				<div class="slide" id="slide-3" data-weather="sunny">
-					<div class="slide__element slide__element--date">Monday, 26<sup>th</sup> of October 2043</div>
-					<div class="slide__element slide__element--temp">25°<small>C</small></div>
-				</div>
-				<!-- Heavy rain -->
-				<div class="slide" id="slide-5" data-weather="storm">
-					<div class="slide__element slide__element--date">Wednesday, 28<sup>th</sup> of October 2043</div>
-					<div class="slide__element slide__element--temp">20°<small>C</small></div>
-				</div>
-				<!-- Fallout (greenish overlay with slightly greenish/yellowish drops) -->
-				<div class="slide" id="slide-4" data-weather="fallout">
-					<div class="slide__element slide__element--date">Tuesday, 27<sup>th</sup> of October 2043</div>
-					<div class="slide__element slide__element--temp">34°<small>C</small></div>
-				</div>
-				<nav class="slideshow__nav">
-					<a class="nav-item" href="#slide-1"><i class="icon icon--rainy"></i><span>10/24</span></a>
-					<a class="nav-item" href="#slide-2"><i class="icon icon--drizzle"></i><span>10/25</span></a>
-					<a class="nav-item" href="#slide-3"><i class="icon icon--sun"></i><span>10/26</span></a>
-					<a class="nav-item" href="#slide-5"><i class="icon icon--storm"></i><span>10/28</span></a>
-					<a class="nav-item" href="#slide-4"><i class="icon icon--radioactive"></i><span>10/27</span></a>
-				</nav>
+				<div class="slide" id="slide-1" data-weather="rain"></div>
 			</div>
 			<p class="nosupport">Sorry, but your browser does not support WebGL!</p>
 		</div>
@@ -115,33 +79,9 @@ export default {
 
 					{name:"textureRainFg",src:"img/weather/texture-rain-fg.png"},
 					{name:"textureRainBg",src:"img/weather/texture-rain-bg.png"},
-
-					{name:"textureStormLightningFg",src:"img/weather/texture-storm-lightning-fg.png"},
-					{name:"textureStormLightningBg",src:"img/weather/texture-storm-lightning-bg.png"},
-
-					{name:"textureFalloutFg",src:"img/weather/texture-fallout-fg.png"},
-					{name:"textureFalloutBg",src:"img/weather/texture-fallout-bg.png"},
-
-					{name:"textureSunFg",src:"img/weather/texture-sun-fg.png"},
-					{name:"textureSunBg",src:"img/weather/texture-sun-bg.png"},
-
-					{name:"textureDrizzleFg",src:"img/weather/texture-drizzle-fg.png"},
-					{name:"textureDrizzleBg",src:"img/weather/texture-drizzle-bg.png"},
 				]).then((images)=>{
 					this.textureRainFg = images.textureRainFg.img;
 					this.textureRainBg = images.textureRainBg.img;
-
-					this.textureFalloutFg = images.textureFalloutFg.img;
-					this.textureFalloutBg = images.textureFalloutBg.img;
-
-					this.textureStormLightningFg = images.textureStormLightningFg.img;
-					this.textureStormLightningBg = images.textureStormLightningBg.img;
-
-					this.textureSunFg = images.textureSunFg.img;
-					this.textureSunBg = images.textureSunBg.img;
-
-					this.textureDrizzleFg = images.textureDrizzleFg.img;
-					this.textureDrizzleBg = images.textureDrizzleBg.img;
 
 					this.dropColor = images.dropColor.img;
 					this.dropAlpha = images.dropAlpha.img;
@@ -260,48 +200,7 @@ export default {
 					// trailRate:2.5,
 					fg:this.textureRainFg,
 					bg:this.textureRainBg
-				}),
-				storm:weather({
-					maxR:55,
-					rainChance:0.4,
-					dropletsRate:80,
-					dropletsSize:[3,5.5],
-					trailRate:2.5,
-					trailScaleRange:[0.25,0.4],
-					fg:this.textureRainFg,
-					bg:this.textureRainBg,
-					flashFg:this.textureStormLightningFg,
-					flashBg:this.textureStormLightningBg,
-					flashChance:0.1
-				}),
-				fallout:weather({
-					minR:30,
-					maxR:60,
-					rainChance:0.35,
-					dropletsRate:20,
-					trailRate:4,
-					fg:this.textureFalloutFg,
-					bg:this.textureFalloutBg,
-					collisionRadiusIncrease:0
-				}),
-				drizzle:weather({
-					minR:10,
-					maxR:40,
-					rainChance:0.15,
-					rainLimit:2,
-					dropletsRate:10,
-					dropletsSize:[3.5,6],
-					fg:this.textureDrizzleFg,
-					bg:this.textureDrizzleBg
-				}),
-				sunny:weather({
-					rainChance:0,
-					rainLimit:0,
-					droplets:0,
-					raining:false,
-					fg:this.textureSunFg,
-					bg:this.textureSunBg
-				}),
+				})
 			};
 		},
 
@@ -333,15 +232,6 @@ export default {
 					this.renderer.updateTextures();
 				}
 			})
-
-			let lastSlide=document.querySelector(".slide--current");
-			if(lastSlide!=null) lastSlide.classList.remove("slide--current");
-
-			let lastNav=document.querySelector(".nav-item--current");
-			if(lastNav!=null) lastNav.classList.remove("nav-item--current");
-
-			currentSlide.classList.add("slide--current");
-			currentNav.classList.add("nav-item--current");
 		},
 
 		flash(baseBg,baseFg,flashBg,flashFg){
