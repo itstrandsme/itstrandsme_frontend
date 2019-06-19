@@ -1,0 +1,63 @@
+.container {
+    flex: 1 1 100%;
+    margin: 0 !important;
+    padding: 0px !important; 
+    width: 100%;
+}
+.slideshow {
+	position: relative;
+	height: 100vh;
+	width: 100vw;
+	background: url(../img/city.jpg) no-repeat center top;
+	background-size: cover;
+	overflow: hidden;
+}
+
+.slideshow::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.slide {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	padding: 35vh 0 0 0;
+	pointer-events: none;
+	line-height: 1;
+	font-family: "Roboto", sans-serif;
+}
+
+/* Content */
+
+.slide__element {
+	opacity: 0;
+	color: #252445;
+	-webkit-transform: translate3d(0, 50px, 0);
+	transform: translate3d(0, 50px, 0);
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.slide--current .slide__element {
+	opacity: 1;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+
+@media screen and (max-height: 39em) {
+	.slideshow {
+		font-size: 75%;
+	}
+	.slide {
+		padding-top: 35vh;
+	}
+}

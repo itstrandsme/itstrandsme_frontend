@@ -1,11 +1,15 @@
 <template>
-  <Rain />
+  <div>
+    <Countdown end="November 8, 2019"></Countdown>
+  </div>
 </template>
 
 <script>
-import Rain from "@/views/Rain.vue"
+import Countdown from 'vuejs-countdown'
 
 export default {
-  name: "MainView"
+  name: "MainView",
+
+  components: { Countdown  }
 };
 </script>
