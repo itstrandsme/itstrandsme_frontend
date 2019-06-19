@@ -1,5 +1,5 @@
 <template>
-	<div style="position: absolute">
+	<div style="position: absolute; top: 0px">
 		<div class="image-preload" style="display:none">
 			<img src="img/drop-color.png" alt="">
 			<img src="img/drop-alpha.png" alt="">

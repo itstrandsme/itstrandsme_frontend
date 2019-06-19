@@ -1,9 +1,26 @@
+@font-face {
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'Sackers_Gothic_Std_Light';
+	src: url('../fonts/Sackers_Gothic_Std_Light/Sackers_Gothic_Std_Light.eot');
+	src: url('../fonts/Sackers_Gothic_Std_Light/Sackers_Gothic_Std_Light.eot?#iefix') format('embedded-opentype'), url('../fonts/Sackers_Gothic_Std_Light/Sackers_Gothic_Std_Light.woff') format('woff'), url('../fonts/Sackers_Gothic_Std_Light/Sackers_Gothic_Std_Light.ttf') format('truetype'), url('../fonts/Sackers_Gothic_Std_Light/Sackers_Gothic_Std_Light.svg#Sackers_Gothic_Std_Light') format('svg');
+}
+
 .container {
     flex: 1 1 100%;
     margin: 0 !important;
     padding: 0px !important; 
     width: 100%;
 }
+
+.countdown {
+	margin: auto;
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	top: 30px;
+}
+
 .slideshow {
 	position: relative;
 	height: 100vh;
