@@ -37,6 +37,9 @@ GL.prototype={
   updateTexture(source){
     WebGL.updateTexture(this.gl,source);
   },
+  viewport(width, height) {
+    this.gl.viewport(0, 0, width, height);
+  },
   draw(){
     WebGL.setRectangle(this.gl, -1, -1, 2, 2);
     this.gl.drawArrays(this.gl.TRIANGLES, 0, 6);

@@ -67,7 +67,9 @@ export default {
 
 			weatherData: null,
 			curWeatherData: null,
-			blend: {v:0}
+			blend: {v:0},
+
+			dpi: 0
 		}
 	},
 	methods: {
@@ -93,16 +95,16 @@ export default {
 		init(){
 			this.canvas=document.querySelector('#container');
 
-			let dpi = window.devicePixelRatio;
-			this.canvas.width = window.innerWidth*dpi;
-			this.canvas.height = window.innerHeight*dpi;
+			this.dpi = window.devicePixelRatio;
+			this.canvas.width = window.innerWidth*this.dpi;
+			this.canvas.height = window.innerHeight*this.dpi;
 			this.canvas.style.width = window.innerWidth+"px";
 			this.canvas.style.height = window.innerHeight+"px";
 
 			this.raindrops=new Raindrops(
 				this.canvas.width,
 				this.canvas.height,
-				dpi,
+				this.dpi,
 				this.dropAlpha,
 				this.dropColor,{
 					trailRate:1,
@@ -272,10 +274,21 @@ export default {
 
 			this.textureBgCtx.globalAlpha=alpha;
 			this.textureBgCtx.drawImage(bg,0,0,this.textureBgSize.width,this.textureBgSize.height);
+		},
+
+		resizeCanvas() {
+			this.dpi = window.devicePixelRatio;
+			this.canvas.width = window.innerWidth*this.dpi;
+			this.canvas.height = window.innerHeight*this.dpi;
+			this.canvas.style.width = window.innerWidth+"px";
+			this.canvas.style.height = window.innerHeight+"px";
+
+			this.updateWeather();
 		}
 	},
 	created: function () {
 		this.loadTextures();
+		window.addEventListener('resize', this.resizeCanvas);
 	}
 };
 </script>

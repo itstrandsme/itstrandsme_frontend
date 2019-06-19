@@ -83,7 +83,9 @@ RainRenderer.prototype={
     this.draw();
   },
   draw(){
+    this.resize();
     this.gl.useProgram(this.programWater);
+    this.gl.createUniform("2f", "resolution", this.width, this.height);
     this.gl.createUniform("2f", "parallax", this.parallaxX,this.parallaxY);
     this.updateTexture();
     this.gl.draw();
@@ -101,7 +103,10 @@ RainRenderer.prototype={
     this.gl.updateTexture(this.canvasLiquid);
   },
   resize(){
+    this.width = this.canvas.width;
+    this.height = this.canvas.height;
 
+    this.gl.viewport(this.width, this.height);
   },
   get overlayTexture(){
 
