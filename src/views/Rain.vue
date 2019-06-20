@@ -281,7 +281,7 @@ export default {
       if (event && typeof event.alpha != "undefined") {
         if (this.alphaAngle < 0)
           this.alphaAngle = event.alpha;
-        if (event.alpha - this.alphaAngle < 90)
+        if (Math.abs(event.alpha - this.alphaAngle) < 90)
           return;
       }
 
