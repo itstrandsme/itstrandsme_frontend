@@ -6,11 +6,14 @@
 	src: url('../fonts/Sackers_Gothic_Std_Light/Sackers_Gothic_Std_Light.eot?#iefix') format('embedded-opentype'), url('../fonts/Sackers_Gothic_Std_Light/Sackers_Gothic_Std_Light.woff') format('woff'), url('../fonts/Sackers_Gothic_Std_Light/Sackers_Gothic_Std_Light.ttf') format('truetype'), url('../fonts/Sackers_Gothic_Std_Light/Sackers_Gothic_Std_Light.svg#Sackers_Gothic_Std_Light') format('svg');
 }
 
-.container {
+.rain {
     flex: 1 1 100%;
-    margin: 0 !important;
-    padding: 0px !important; 
+    padding-left: 0px !important; 
     width: 100%;
+}
+
+.ds {
+	font-family: 'Sackers_Gothic_Std_Light', sans-serif !important;
 }
 
 .countdown {

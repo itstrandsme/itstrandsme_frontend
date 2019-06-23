@@ -100,17 +100,17 @@ RainRenderer.prototype = {
       gl.createUniform("1i", texture.name, i + 1);
     });
 
-    this.draw();
+    this.render();
   },
-  draw() {
-    this.resize();
+  render() {
+    this.gl.viewport(this.gl.canvas.width, this.gl.canvas.height);
     this.gl.useProgram(this.programWater);
     this.gl.createUniform("2f", "resolution", this.width, this.height);
     this.gl.createUniform("2f", "parallax", this.parallaxX, this.parallaxY);
     this.updateTexture();
     this.gl.draw();
 
-    requestAnimationFrame(this.draw.bind(this));
+    requestAnimationFrame(this.render.bind(this));
   },
   updateTextures() {
     this.textures.forEach((texture, i) => {
@@ -123,10 +123,16 @@ RainRenderer.prototype = {
     this.gl.updateTexture(this.canvasLiquid);
   },
   resize() {
-    this.width = this.canvas.width;
-    this.height = this.canvas.height;
-
-    this.gl.viewport(this.width, this.height);
+    var width = this.canvas.clientWidth;
+    var height = this.canvas.clientHeight;
+    if (this.canvas.width != width ||
+        this.canvas.height != height) {
+      this.canvas.width = width;
+      this.canvas.height = height;
+            
+      // in this case just render when the window is resized.
+      this.render();
+    }
   },
   get overlayTexture() {
     return null;

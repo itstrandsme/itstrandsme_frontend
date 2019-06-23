@@ -1,10 +1,8 @@
 <template>
   <v-app>
     <v-content>
-      <v-container fluid rain>
-        <Rain />
-        <MainView />
-      </v-container>
+      <Rain />
+      <MainView />
     </v-content>
   </v-app>
 </template>
