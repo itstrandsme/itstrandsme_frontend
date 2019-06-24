@@ -36,38 +36,30 @@ export function createProgram(gl, vertexScript, fragScript) {
     return null;
   }
 
-  var positionLocation = gl.getAttribLocation(program, "a_position");
-  var texCoordLocation = gl.getAttribLocation(program, "a_texCoord");
-
+  var texCoordLocation = gl.getAttribLocation(program, "a_position");
   var texCoordBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
   gl.bufferData(
     gl.ARRAY_BUFFER,
     new Float32Array([
-      -1.0,
-      -1.0,
-      1.0,
-      -1.0,
-      -1.0,
-      1.0,
-      -1.0,
-      1.0,
-      1.0,
-      -1.0,
-      1.0,
-      1.0
+      -1.0, -1.0, 1.0,
+      -1.0, -1.0, 1.0,
+
+      -1.0, 1.0,  1.0,
+      -1.0, 1.0,  1.0
     ]),
     gl.STATIC_DRAW
   );
   gl.enableVertexAttribArray(texCoordLocation);
   gl.vertexAttribPointer(texCoordLocation, 2, gl.FLOAT, false, 0, 0);
-
+/*
+  var positionLocation = gl.getAttribLocation(program, "a_position");
   // Create a buffer for the position of the rectangle corners.
   var buffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
   gl.enableVertexAttribArray(positionLocation);
   gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-
+*/
   return program;
 }
 

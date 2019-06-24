@@ -72,7 +72,7 @@ export default {
       blend: {v: 0},
 
       dpi: 0,
-      alphaAngle: -1,
+      oA: {alpha: -1, beta: -1, gamma: -1}
     }
   },
   methods: {
@@ -291,19 +291,29 @@ export default {
       this.textureBgCtx.drawImage(bg, 0, 0, this.textureBgSize.width, this.textureBgSize.height);
     },
 
-    resizeCanvas(event) {
-      if (event && typeof event.alpha != "undefined") {
-        if (this.alphaAngle < 0)
-          this.alphaAngle = event.alpha;
-        if (Math.abs(event.alpha - this.alphaAngle) < 90)
-          return;
+    rotateCanvas(event) {
+      if (this.oA.alpha < 0)
+      {
+        this.oA.alpha = event.alpha;
+        this.oA.beta = event.beta;
+        this.oA.gamma = event.gamma;
       }
 
+      var th = 90;
+      if (Math.abs(event.alpha - this.oA.alpha) < th &&
+          Math.abs(event.beta - this.oA.beta) < th &&
+          Math.abs(event.gamma - this.oA.gamma) < th )
+        return;
+
+      this.resizeCanvas(null);
+    },
+
+    resizeCanvas(event) {
       this.dpi = window.devicePixelRatio;
       this.canvas.width = window.innerWidth * this.dpi;
       this.canvas.height = window.innerHeight * this.dpi;
-      this.canvas.style.width = window.innerWidth+"px";
-      this.canvas.style.height = window.innerHeight+"px";
+      this.canvas.style.width = window.innerWidth + "px";
+      this.canvas.style.height = window.innerHeight + "px";
 
       this.updateWeather();
     }
@@ -313,7 +323,7 @@ export default {
       window.addEventListener("resize", this.resizeCanvas);
 
       if (window.DeviceOrientationEvent)
-        window.addEventListener("deviceorientation", this.resizeCanvas);
+        window.addEventListener("deviceorientation", this.rotateCanvas);
   }
 };
 </script>
