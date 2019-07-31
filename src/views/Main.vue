@@ -61,7 +61,9 @@ export default {
   },
 
   mounted () {
-  	this.$nextTick( () => window.twttr.widgets.load );
+  	this.$nextTick(() => {
+  		setTimeout( window.twttr.widgets.load, 2000 );
+	});
   },
 
   components: {

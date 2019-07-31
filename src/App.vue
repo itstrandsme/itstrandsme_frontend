@@ -2,7 +2,9 @@
   <v-app dark>
     <v-content>
       <Rain />
-      <MainView />
+        <v-container fluid>
+          <MainView />
+        </v-container>
     </v-content>
   </v-app>
 </template>
