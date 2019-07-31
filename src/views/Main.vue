@@ -62,7 +62,10 @@ export default {
 
   mounted () {
   	this.$nextTick(() => {
-  		setTimeout( window.twttr.widgets.load, 2000 );
+  		setTimeout(() => {
+  			if ( typeof window.twttr.widgets !== "undefined" )
+  				window.twttr.widgets.load()
+  		}, 2000);
 	});
   },
 
