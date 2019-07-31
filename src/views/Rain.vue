@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid rain>
+  <v-container v-resize="onResize" fluid rain>
   <div style="position: absolute; top: 0px">
     <div class="image-preload" style="display:none">
       <img src="img/drop-color.png" alt="">
@@ -72,11 +72,10 @@ export default {
       blend: {v: 0},
 
       dpi: 0,
-      oA: {alpha: -1, beta: -1, gamma: -1}
     }
   },
-  methods: {
 
+  methods: {
     loadTextures() {
       loadImages([
           {name: "dropAlpha", src: "img/drop-alpha.png"},
@@ -99,12 +98,17 @@ export default {
       this.canvas = document.querySelector('#container');
 
       this.dpi = window.devicePixelRatio;
-      this.canvas.width = window.innerWidth*this.dpi;
-      this.canvas.height = window.innerHeight*this.dpi;
-      this.canvas.style.width = window.innerWidth+"px";
-      this.canvas.style.height = window.innerHeight+"px";
+      var displayWidth  = Math.floor(window.innerWidth  * this.dpi);
+      var displayHeight = Math.floor(window.innerHeight * this.dpi);
 
-      this.raindrops=new Raindrops(
+      // Make the canvas the same size
+      this.canvas.width  = displayWidth;
+      this.canvas.height = displayHeight;
+
+      this.canvas.style.width = displayWidth + "px";
+      this.canvas.style.height = displayHeight + "px";
+
+      this.raindrops = new Raindrops(
         this.canvas.width,
         this.canvas.height,
         this.dpi,
@@ -193,7 +197,7 @@ export default {
         maxR: 50,
         rainChance: 0.35,
         rainLimit: 6,
-        dropletsRate: 50,
+        dropletsRate: 30,
         dropletsSize: [3, 5.5],
         trailRate: 1,
         trailScaleRange: [0.25, 0.35],
@@ -212,7 +216,7 @@ export default {
       this.weatherData = {
         rain:weather({
           rainChance:0.35,
-          dropletsRate:50,
+          dropletsRate:30,
           raining:true,
           // trailRate:2.5,
           fg:this.textureRainFg,
@@ -221,19 +225,22 @@ export default {
       };
     },
 
-    updateWeather(){
+    updateWeather() {
       let hash = window.location.hash;
-      let currentSlide=null;
-      let currentNav=null;
-      if(hash!=""){
+      let currentSlide = null;
+      let currentNav = null;
+
+      if (hash != ""){
         currentSlide = document.querySelector(hash);
       }
-      if(currentSlide==null){
+
+      if(currentSlide == null){
         currentSlide = document.querySelector(".slide");
         hash="#"+currentSlide.getAttribute("id");
       }
-      currentNav=document.querySelector("[href='"+hash+"']");
-      let data=this.weatherData[currentSlide.getAttribute('data-weather')];
+
+      currentNav = document.querySelector("[href='"+hash+"']");
+      let data = this.weatherData[currentSlide.getAttribute('data-weather')];
       this.curWeatherData=data;
 
       this.raindrops.options = Object.assign(this.raindrops.options,data)
@@ -291,39 +298,42 @@ export default {
       this.textureBgCtx.drawImage(bg, 0, 0, this.textureBgSize.width, this.textureBgSize.height);
     },
 
-    rotateCanvas(event) {
-      if (this.oA.alpha < 0)
-      {
-        this.oA.alpha = event.alpha;
-        this.oA.beta = event.beta;
-        this.oA.gamma = event.gamma;
-      }
-
-      var th = 90;
-      if (Math.abs(event.alpha - this.oA.alpha) < th &&
-          Math.abs(event.beta - this.oA.beta) < th &&
-          Math.abs(event.gamma - this.oA.gamma) < th )
-        return;
-
+    onResize() {
       this.resizeCanvas(null);
     },
 
     resizeCanvas(event) {
-      this.dpi = window.devicePixelRatio;
-      this.canvas.width = window.innerWidth * this.dpi;
-      this.canvas.height = window.innerHeight * this.dpi;
-      this.canvas.style.width = window.innerWidth + "px";
-      this.canvas.style.height = window.innerHeight + "px";
+      
+      if (!this.canvas || !this.renderer)
+        return;
 
-      this.updateWeather();
+      var displayWidth  = Math.floor(window.innerWidth  * this.dpi);
+      var displayHeight = Math.floor(window.innerHeight * this.dpi);
+
+      if (this.canvas.width  !== displayWidth ||
+          this.canvas.height !== displayHeight) {
+
+        this.canvas.width  = displayWidth;
+        this.canvas.height = displayHeight;
+
+        this.canvas.style.width = displayWidth + "px";
+        this.canvas.style.height = displayHeight + "px";
+
+		this.renderer.resize();
+		//this.updateWeather();
+      }
     }
   },
+
   created: function () {
       this.loadTextures();
-      window.addEventListener("resize", this.resizeCanvas);
+      //window.addEventListener("resize", this.resizeCanvas);
 
-      if (window.DeviceOrientationEvent)
-        window.addEventListener("deviceorientation", this.rotateCanvas);
+      if ('ondeviceorientationabsolute' in window) {
+        window.addEventListener("ondeviceorientationabsolute", this.resizeCanvas, false);
+      } else if ('ondeviceorientation' in window) {
+        window.addEventListener("deviceorientation", this.resizeCanvas, false);
+      }
   }
 };
 </script>

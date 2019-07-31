@@ -127,9 +127,13 @@ RainRenderer.prototype = {
     var height = this.canvas.clientHeight;
     if (this.canvas.width != width ||
         this.canvas.height != height) {
+
+      this.width = width;
+      this.height = height;
+
       this.canvas.width = width;
       this.canvas.height = height;
-            
+
       // in this case just render when the window is resized.
       this.render();
     }
