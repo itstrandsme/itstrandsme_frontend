@@ -147,9 +147,9 @@ export default {
     },
 
     setupEvents() {
-      this.setupParallax();
+      //this.setupParallax();
       this.setupWeather();
-      this.setupFlash();
+      //this.setupFlash();
     },
 
     setupParallax() {

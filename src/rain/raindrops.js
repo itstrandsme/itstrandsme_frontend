@@ -22,7 +22,7 @@ const Drop={
 const defaultOptions={
   minR:10,
   maxR:40,
-  maxDrops:900,
+  maxDrops:256,
   rainChance:0.3,
   rainLimit:3,
   dropletsRate:50,

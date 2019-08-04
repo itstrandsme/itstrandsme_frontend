@@ -135,7 +135,7 @@ RainRenderer.prototype = {
       this.canvas.height = height;
 
       // in this case just render when the window is resized.
-      this.render();
+      //this.render();
     }
   },
   get overlayTexture() {
