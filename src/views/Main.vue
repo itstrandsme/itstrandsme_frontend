@@ -12,7 +12,7 @@
       <v-layout row wrap>
         <v-flex
           max-width="380"
-          xs12 sm12 md6 lg6
+          xs12 sm12 md6 lg6        
           v-for="(item, i) in countdowns"
           :key="i"
         >
@@ -27,7 +27,12 @@
                 </a>
               </div>
               <span>{{ item.subtitle }}</span>
-              <countdown :time="item.time" :interval="100">
+              <countdown
+                :time="item.time"
+                :interval="100"
+                @end="handleCountdownEnd(i)"
+                v-if="item.counting == true"
+              >
                 <template slot-scope="props">
                   <ul class="vuejs-countdown">
                     <li>
@@ -49,6 +54,20 @@
                   </ul>
                 </template>
               </countdown>
+              <template
+                v-if="item.counting == false"
+              >
+                <ul class="vuejs-countdown">
+                  <li>
+                    <p class="digit">{{ item.finishText }}</p>
+                    <p class="text">
+                      <a :href="item.url" target="_blank" class="white--text">
+                        {{ item.finishSubText }}
+                      </a>
+                    </p>
+                  </li>
+                </ul>
+              </template>
             </v-card-text>
           </v-card>
         </v-flex>
@@ -64,14 +83,16 @@
             >
               <v-expansion-panel-content
                 class="blue-grey darken-4"
+                v-for="(item, i) in youtube"
+                :key="i"
               >
                 <template v-slot:header>
-                  <div>KOJIMA PRODUCTIONS Videos</div>
+                  <div>{{ item.title }}</div>
                 </template>
                 <iframe
                   width="100%"
                   height="315"
-                  src="https://www.youtube.com/embed/+lastest?list=PL4np0lscUMnvSVQYCiGwCWELdmfV2zdlS"
+                  :src="item.src"
                   frameborder="0"
                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
@@ -79,7 +100,7 @@
               </v-expansion-panel-content>
               <v-expansion-panel-content
                 class="blue-grey darken-4"
-                v-for="(item, i) in twitters"
+                v-for="(item, i) in twitter"
                 :key="i"
               >
                 <template v-slot:header>
@@ -88,7 +109,7 @@
                 <v-card color="blue-grey darken-3">
                   <a
                     class="twitter-timeline white--text" 
-                    data-tweet-limit="10" 
+                    data-tweet-limit="20" 
                     data-width="760" 
                     data-theme="dark" 
                     data-link-color="#F5F8FA"
@@ -118,28 +139,43 @@ export default {
   data() {
     var now = new Date();
     var releaseDate = new Date(2019, 10, 8) - now;
-    var panelDate = new Date(2019, 7, 19, 16) - now;
+    var panelDate = new Date(2019, 7, 19, 20, 30) - now;
 
     return {
-      counting: false,
-      panel: [true, true, false],
+      panel: [true, false, true, false],
       countdowns: [
         {
           title: "Death Stranding",
-          subtitle: "releases in:", 
+          subtitle: "releases in:",
           class: "headline ds",
-          url: "http://www.kojimaproductions.jp/",
-          time: releaseDate
+          url: "https://store.playstation.com/en-us/product/UP9000-CUSA11260_00-DEATHSTRAND00001",
+          time: releaseDate,
+          finishText: "Today!",
+          finishSubText: "Check it here",
+          counting: true
         },
         {
           title: "gamescom: ONL",
-          subtitle: "goes on air in:", 
+          subtitle: "goes on air in:",
           class: "headline",
-          url: "https://www.gamescom.global/events-and-congresses/for-all/opening-night-live/page-home-260.php",
-          time: panelDate
+          url: "https://www.youtube.com/watch?v=8VucAVd7gNs",
+          time: panelDate,
+          finishText: "Now!",
+          finishSubText: "Watch it here",
+          counting: true
         },
       ],
-      twitters: [
+      youtube: [
+        {
+          title: "Gamescom Opening Night LIVE Monday: OFFICIAL LIVESTREAM",
+          src: "https://www.youtube-nocookie.com/embed/8VucAVd7gNs"
+        },
+        {
+          title: "KOJIMA PRODUCTIONS Videos",
+          src: "https://www.youtube.com/embed/+lastest?list=PL4np0lscUMnvSVQYCiGwCWELdmfV2zdlS"
+        }
+      ],
+      twitter: [
         { account: "HIDEO_KOJIMA_EN" },
         { account: "Kojima_Hideo" }
       ]
@@ -159,11 +195,8 @@ export default {
     getTwitterAccountUrl( account ) {
       return "https://twitter.com/" + account + "?ref_src=twsrc%5Etfw";
     },
-    startCountdown: function () {
-      this.counting = true;
-    },
-    handleCountdownEnd: function () {
-      this.counting = false;
+    handleCountdownEnd: function (i) {
+      this.countdowns[i].counting = false;
     }
   },
 
