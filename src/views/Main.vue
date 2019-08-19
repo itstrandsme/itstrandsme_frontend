@@ -139,10 +139,10 @@ export default {
   data() {
     var now = new Date();
     var releaseDate = new Date(2019, 10, 8) - now;
-    var panelDate = new Date(2019, 7, 19, 20, 30) - now;
+    var panelDate = new Date(2019, 8, 12) - now;
 
     return {
-      panel: [true, false, true, false],
+      panel: [true, true, false],
       countdowns: [
         {
           title: "Death Stranding",
@@ -155,21 +155,17 @@ export default {
           counting: true
         },
         {
-          title: "gamescom: ONL",
-          subtitle: "goes on air in:",
+          title: "Tokyo Game Show",
+          subtitle: "begins in:",
           class: "headline",
-          url: "https://www.youtube.com/watch?v=8VucAVd7gNs",
+          url: "https://expo.nikkeibp.co.jp/tgs/2019/exhibition/en/",
           time: panelDate,
-          finishText: "Now!",
-          finishSubText: "Watch it here",
+          finishText: "Today!",
+          finishSubText: "Check it here",
           counting: true
         },
       ],
       youtube: [
-        {
-          title: "Gamescom Opening Night LIVE Monday: OFFICIAL LIVESTREAM",
-          src: "https://www.youtube-nocookie.com/embed/8VucAVd7gNs"
-        },
         {
           title: "KOJIMA PRODUCTIONS Videos",
           src: "https://www.youtube.com/embed/+lastest?list=PL4np0lscUMnvSVQYCiGwCWELdmfV2zdlS"
