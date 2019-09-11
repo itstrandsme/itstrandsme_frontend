@@ -155,8 +155,8 @@ export default {
           counting: true
         },
         {
-          title: "Tokyo Game Show",
-          subtitle: "begins in:",
+          title: "TGS 2019 Showcase",
+          subtitle: "goes live in:",
           class: "headline",
           url: "https://www.youtube.com/watch?v=fymZ6AAybMM",
           time: panelDate,
@@ -168,7 +168,7 @@ export default {
       youtube: [
         {
           title: "PlayStation® presents LIVE SHOW “TGS2019”",
-          src: "https://www.youtube.com/watch?v=fymZ6AAybMM"
+          src: "https://www.youtube.com/embed/fymZ6AAybMM"
         },
         {
           title: "KOJIMA PRODUCTIONS Videos",
