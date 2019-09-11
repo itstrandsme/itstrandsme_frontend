@@ -139,10 +139,10 @@ export default {
   data() {
     var now = new Date();
     var releaseDate = new Date(2019, 10, 8) - now;
-    var panelDate = new Date(2019, 8, 12) - now;
+    var panelDate = new Date(2019, 8, 12, 9, 30) - now;
 
     return {
-      panel: [true, true, false],
+      panel: [true, false, true, false],
       countdowns: [
         {
           title: "Death Stranding",
