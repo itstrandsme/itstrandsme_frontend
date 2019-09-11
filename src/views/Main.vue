@@ -158,14 +158,18 @@ export default {
           title: "Tokyo Game Show",
           subtitle: "begins in:",
           class: "headline",
-          url: "https://expo.nikkeibp.co.jp/tgs/2019/exhibition/en/",
+          url: "https://www.youtube.com/watch?v=fymZ6AAybMM",
           time: panelDate,
-          finishText: "Today!",
+          finishText: "“On Air”",
           finishSubText: "Check it here",
           counting: true
         },
       ],
       youtube: [
+        {
+          title: "PlayStation® presents LIVE SHOW “TGS2019”",
+          src: "https://www.youtube.com/watch?v=fymZ6AAybMM"
+        },
         {
           title: "KOJIMA PRODUCTIONS Videos",
           src: "https://www.youtube.com/embed/+lastest?list=PL4np0lscUMnvSVQYCiGwCWELdmfV2zdlS"
