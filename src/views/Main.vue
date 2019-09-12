@@ -139,7 +139,7 @@ export default {
   data() {
     var now = new Date();
     var releaseDate = new Date(2019, 10, 8) - now;
-    var panelDate = new Date(2019, 8, 12, 9, 30) - now;
+    var panelDate = new Date(2019, 8, 14, 9) - now;
 
     return {
       panel: [true, false, true, false],
@@ -155,7 +155,7 @@ export default {
           counting: true
         },
         {
-          title: "TGS 2019 Showcase",
+          title: "TGS 2019 Showcase Pt.2",
           subtitle: "goes live in:",
           class: "headline",
           url: "https://www.youtube.com/watch?v=fymZ6AAybMM",
