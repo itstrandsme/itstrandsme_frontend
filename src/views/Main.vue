@@ -11,7 +11,6 @@
     >
       <v-layout row wrap>
         <v-flex
-          max-width="380"
           xs12 sm12 md6 lg6        
           v-for="(item, i) in countdowns"
           :key="i"
