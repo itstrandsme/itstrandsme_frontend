@@ -139,10 +139,9 @@ export default {
   data() {
     var now = new Date();
     var releaseDate = new Date(2019, 10, 8) - now;
-    var panelDate = new Date(2019, 8, 14, 9) - now;
 
     return {
-      panel: [true, false, true, false],
+      panel: [true, true, false],
       countdowns: [
         {
           title: "Death Stranding",
@@ -153,23 +152,9 @@ export default {
           finishText: "Today!",
           finishSubText: "Check it here",
           counting: true
-        },
-        {
-          title: "TGS 2019 Showcase Pt.2",
-          subtitle: "goes live in:",
-          class: "headline",
-          url: "https://www.youtube.com/watch?v=fymZ6AAybMM",
-          time: panelDate,
-          finishText: "“On Air”",
-          finishSubText: "Check it here",
-          counting: true
-        },
+        }
       ],
       youtube: [
-        {
-          title: "PlayStation® presents LIVE SHOW “TGS2019”",
-          src: "https://www.youtube.com/embed/fymZ6AAybMM"
-        },
         {
           title: "KOJIMA PRODUCTIONS Videos",
           src: "https://www.youtube.com/embed/+lastest?list=PL4np0lscUMnvSVQYCiGwCWELdmfV2zdlS"
