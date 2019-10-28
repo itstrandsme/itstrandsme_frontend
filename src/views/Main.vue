@@ -139,7 +139,7 @@ export default {
     var releaseDate = new Date(2019, 10, 8) - now;
 
     return {
-      panel: [true, true, false],
+      panel: [true, false, true, false],
       countdowns: [
         {
           title: "Death Stranding",
@@ -159,6 +159,7 @@ export default {
         }
       ],
       twitter: [
+        { account: "KojiPro2015_EN" },
         { account: "HIDEO_KOJIMA_EN" },
         { account: "Kojima_Hideo" }
       ]
