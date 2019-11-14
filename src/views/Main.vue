@@ -147,7 +147,7 @@ export default {
           class: "headline ds",
           url: "https://store.playstation.com/en-us/product/UP9000-CUSA11260_00-DEATHSTRAND00001",
           time: releaseDate,
-          finishText: "Today!",
+          finishText: "Released!",
           finishSubText: "Check it here",
           counting: true
         }
